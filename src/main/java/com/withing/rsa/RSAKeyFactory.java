@@ -38,47 +38,24 @@ public class RSAKeyFactory implements KeyFactoryApi {
     }
 
     @Override
-    public void generateKey() {
+    public boolean generateKey(String path) {
         RSAPrivateKey privateKey = new RSAPrivateKey();
         RSAPublicKey publicKey = privateKey.getPublicKeyInstance();
-        writePrivateKey(privateKey);
-        writePublicKey(publicKey);
+        return writeKey(privateKey, publicKey, path);
+        
     }
 
-    private void writePrivateKey(RSAPrivateKey privateKey) {
-        try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("rsa/rsa"));) {
+    private boolean writeKey(RSAPrivateKey privateKey, RSAPublicKey publicKey, String filePath) {
+        try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(filePath + "rsa"));
+             ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream("D:\\rsa\\rsa.pub"))) {
             objectOutputStream.writeObject(privateKey);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-//        try (PrintWriter printWriter = new PrintWriter(new File("rsa/rsa"));) {
-//            printWriter.print(privateKey.getModule());
-//            printWriter.print("\n");
-//            printWriter.print(privateKey.getPublicExponent());
-//            printWriter.print("\n");
-//            printWriter.print(privateKey.getPrivateExponent());
-//            printWriter.print("\n");
-//            printWriter.print(privateKey.getPrime1());
-//            printWriter.print("\n");
-//            printWriter.print(privateKey.getPrime2());
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        }
-    }
-
-    private void writePublicKey(RSAPublicKey publicKey) {
-        try(ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream("rsa/rsa.pub"))){
             outputStream.writeObject(publicKey);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("filePath: " + filePath + "is not exist");
+            return false;
         }
-//        try (PrintWriter printWriter = new PrintWriter(new File("rsa/rsa.pub"))) {
-//            printWriter.print(publicKey.getModule());
-//            printWriter.print("\n");
-//            printWriter.print(publicKey.getPublicExponent());
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        }
+        return true;
     }
+
 
 }

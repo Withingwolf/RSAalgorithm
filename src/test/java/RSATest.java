@@ -6,7 +6,6 @@ import com.withing.rsa.domain.RSAPublicKey;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.math.BigInteger;
 
 /**
  * Package: PACKAGE_NAME
@@ -20,12 +19,11 @@ public class RSATest {
 
     public static void main(String[] args) {
         KeyFactoryApi factoryApi = KeyFactory.getDefaultKeyFactoryApi();
-        factoryApi.generateKey();
         RSAPublicKey publicKey = null;
         RSAPrivateKey privateKey = null;
         try (
-                ObjectInputStream publicStream = new ObjectInputStream(new FileInputStream("rsa/rsa.pub"));
-                ObjectInputStream privateStream = new ObjectInputStream(new FileInputStream("rsa/rsa"))
+                ObjectInputStream publicStream = new ObjectInputStream(new FileInputStream("D:\\rsa\\rsa.pub"));
+                ObjectInputStream privateStream = new ObjectInputStream(new FileInputStream("D:\\rsa\\rsa"))
         ) {
             publicKey = (RSAPublicKey) publicStream.readObject();
             privateKey = (RSAPrivateKey) privateStream.readObject();
