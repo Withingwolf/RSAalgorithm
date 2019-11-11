@@ -10,6 +10,6 @@ package com.withing.rsa.api;
  */
 public interface KeyFactoryApi {
 
-    boolean generateKey(String filePath);
+    void generateKey();
 
 }

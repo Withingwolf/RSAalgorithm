@@ -7,7 +7,6 @@
     <groupId>withing.project</groupId>
     <artifactId>RSA</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
@@ -51,43 +50,10 @@
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
-                    <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
-            <plugin>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <addClasspath>true</addClasspath>
-                            <mainClass>com.withing.rsa.Main</mainClass>
-                            <classpathPrefix>lib</classpathPrefix>
-                        </manifest>
-                        <!--                        <fileSet>-->
-                        <!--                            <directory>rsa</directory>-->
-                        <!--                            <outputDirectory>rsa</outputDirectory>-->
-                        <!--                        </fileSet>-->
-                    </archive>
-                    <descriptorRefs>
-                        <descriptorRef>jar-with-dependencies</descriptorRef>
-                    </descriptorRefs>
-                    <descriptors>
-                        <descriptor>assembly/release.xml</descriptor>
-                    </descriptors>
-                </configuration>
-                <!--下面是为了使用 mvn package命令，如果不加则使用mvn assembly-->
-                <executions>
-                    <execution>
-                        <id>make-assemble</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+
         </plugins>
-        <finalName>rsa</finalName>
     </build>
 
 </project>
